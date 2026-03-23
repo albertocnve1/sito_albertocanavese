@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Album {
+  id           String   @id @default(uuid())
+  title        String
+  date         DateTime
+  coverPhotoId String?
+  isPrivate    Boolean  @default(false)
+  passwordHash String?
+  photos       Photo[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Photo {
+  id           String   @id @default(uuid())
+  albumId      String
+  album        Album    @relation(fields: [albumId], references: [id])
+  objectKey    String
+  displayOrder Int      @default(0)
+  exifData     Json?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Booking {
+  id         String   @id @default(uuid())
+  clientName String
+  email      String
+  eventType  String
+  date       DateTime
+  status     String   @default("PENDING")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}

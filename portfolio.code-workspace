@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "name": "FRONTEND",
+      "path": "frontend"
+    },
+    {
+      "name": "BACKEND",
+      "path": "backend"
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true
+  }
+}
